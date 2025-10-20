@@ -1,236 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>World Clock - Time Zones</title>
-  <link rel="stylesheet" href="src/styles.css">
-</head>
-<body>
-  <!-- Background Particles -->
-  <div id="particles"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>World Clock</title>
+    <link rel="stylesheet" href="src/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>🌍 World Clock</h1>
+        <p class="subtitle">Check the time around the world</p>
+      </header>
 
-  <!-- Navigation -->
-  <nav class="navbar">
-    <div class="nav-container">
-      <a href="portfolio.html" class="logo">🌍 World Clock</a>
-      <div class="nav-right">
-        <a href="portfolio.html" class="home-link">← Back to Portfolio</a>
-        <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
-          <span class="sun">☀️</span>
-          <span class="moon">🌙</span>
-        </button>
+      <div class="selector-container">
+        <label for="city-select">Select a City:</label>
+        <select id="city-select">
+          <option value="">Choose a location...</option>
+          <option value="America/New_York">New York, USA</option>
+          <option value="Europe/London">London, UK</option>
+          <option value="Asia/Tokyo">Tokyo, Japan</option>
+          <option value="Australia/Sydney">Sydney, Australia</option>
+          <option value="Europe/Paris">Paris, France</option>
+          <option value="Asia/Dubai">Dubai, UAE</option>
+          <option value="current">My Current Location</option>
+        </select>
       </div>
+
+      <div id="selected-city" class="city-card hidden">
+        <a href="index.html" class="home-link">← Back to Homepage</a>
+        <div class="city-info">
+          <h2 class="city-name"></h2>
+          <div class="time"></div>
+          <div class="date"></div>
+        </div>
+      </div>
+
+      <div id="default-cities" class="cities-grid">
+        <div class="city-card" data-timezone="America/New_York">
+          <h2 class="city-name">New York</h2>
+          <div class="country">United States</div>
+          <div class="time"></div>
+          <div class="date"></div>
+        </div>
+
+        <div class="city-card" data-timezone="Europe/London">
+          <h2 class="city-name">London</h2>
+          <div class="country">United Kingdom</div>
+          <div class="time"></div>
+          <div class="date"></div>
+        </div>
+
+        <div class="city-card" data-timezone="Asia/Tokyo">
+          <h2 class="city-name">Tokyo</h2>
+          <div class="country">Japan</div>
+          <div class="time"></div>
+          <div class="date"></div>
+        </div>
+      </div>
+
+      <footer>
+        This project was coded with by <strong>Lexi Cantrell </strong> and is
+        <a href="https://github.com/lexi2345/world-clocl-project" target="_blank">
+          open sourced on GitHub</a
+        >  Hosted on  <a href=" https://worldclockappcolorful.netlify.app/" target="_blank"> Netlify
+      </footer>
     </div>
-  </nav>
-
-  <!-- Main Content -->
-  <main class="container">
-    <!-- Hero Section -->
-    <section class="hero">
-      <h1 class="hero-title">World Clock</h1>
-      <p class="hero-subtitle">Track time across the globe in real-time</p>
-    </section>
-
-    <!-- User's Current Location -->
-    <section class="current-location">
-      <div class="location-card your-location">
-        <div class="card-header">
-          <h2>📍 Your Current Location</h2>
-          <button id="detectLocation" class="detect-btn">Detect My Location</button>
-        </div>
-        <div class="clock-container">
-          <div class="analog-clock" id="yourAnalogClock">
-            <div class="clock-face">
-              <div class="hand hour-hand" id="yourHourHand"></div>
-              <div class="hand minute-hand" id="yourMinuteHand"></div>
-              <div class="hand second-hand" id="yourSecondHand"></div>
-              <div class="center-dot"></div>
-            </div>
-          </div>
-          <div class="digital-info">
-            <div class="city-name" id="yourCityName">Detecting...</div>
-            <div class="time" id="yourTime">--:--:--</div>
-            <div class="date" id="yourDate">Loading...</div>
-            <div class="timezone" id="yourTimezone">---</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- World Clocks -->
-    <section class="world-clocks">
-      <h2 class="section-title">World Time Zones</h2>
-      
-      <!-- Clock 1 -->
-      <div class="location-card" data-index="0">
-        <div class="card-header">
-          <h3 class="location-number">Location 1</h3>
-          <select class="location-select" data-clock="0">
-            <option value="America/New_York">New York, USA</option>
-            <option value="America/Los_Angeles">Los Angeles, USA</option>
-            <option value="America/Chicago">Chicago, USA</option>
-            <option value="America/Denver">Denver, USA</option>
-            <option value="America/Toronto">Toronto, Canada</option>
-            <option value="America/Mexico_City">Mexico City, Mexico</option>
-            <option value="America/Sao_Paulo">São Paulo, Brazil</option>
-            <option value="Europe/London">London, UK</option>
-            <option value="Europe/Paris">Paris, France</option>
-            <option value="Europe/Berlin">Berlin, Germany</option>
-            <option value="Europe/Rome">Rome, Italy</option>
-            <option value="Europe/Madrid">Madrid, Spain</option>
-            <option value="Europe/Moscow">Moscow, Russia</option>
-            <option value="Asia/Dubai">Dubai, UAE</option>
-            <option value="Asia/Tokyo">Tokyo, Japan</option>
-            <option value="Asia/Shanghai">Shanghai, China</option>
-            <option value="Asia/Hong_Kong">Hong Kong</option>
-            <option value="Asia/Singapore">Singapore</option>
-            <option value="Asia/Seoul">Seoul, South Korea</option>
-            <option value="Asia/Mumbai">Mumbai, India</option>
-            <option value="Asia/Bangkok">Bangkok, Thailand</option>
-            <option value="Australia/Sydney">Sydney, Australia</option>
-            <option value="Pacific/Auckland">Auckland, New Zealand</option>
-            <option value="Africa/Cairo">Cairo, Egypt</option>
-            <option value="Africa/Johannesburg">Johannesburg, South Africa</option>
-          </select>
-        </div>
-        <div class="clock-container">
-          <div class="analog-clock">
-            <div class="clock-face">
-              <div class="hand hour-hand" data-hand="hour-0"></div>
-              <div class="hand minute-hand" data-hand="minute-0"></div>
-              <div class="hand second-hand" data-hand="second-0"></div>
-              <div class="center-dot"></div>
-            </div>
-          </div>
-          <div class="digital-info">
-            <div class="city-name" data-city="0">New York</div>
-            <div class="time" data-time="0">00:00:00</div>
-            <div class="date" data-date="0">Monday, January 1, 2024</div>
-            <div class="timezone" data-tz="0">EST (UTC-5)</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Clock 2 -->
-      <div class="location-card" data-index="1">
-        <div class="card-header">
-          <h3 class="location-number">Location 2</h3>
-          <select class="location-select" data-clock="1">
-            <option value="America/New_York">New York, USA</option>
-            <option value="America/Los_Angeles">Los Angeles, USA</option>
-            <option value="America/Chicago">Chicago, USA</option>
-            <option value="America/Denver">Denver, USA</option>
-            <option value="America/Toronto">Toronto, Canada</option>
-            <option value="America/Mexico_City">Mexico City, Mexico</option>
-            <option value="America/Sao_Paulo">São Paulo, Brazil</option>
-            <option value="Europe/London" selected>London, UK</option>
-            <option value="Europe/Paris">Paris, France</option>
-            <option value="Europe/Berlin">Berlin, Germany</option>
-            <option value="Europe/Rome">Rome, Italy</option>
-            <option value="Europe/Madrid">Madrid, Spain</option>
-            <option value="Europe/Moscow">Moscow, Russia</option>
-            <option value="Asia/Dubai">Dubai, UAE</option>
-            <option value="Asia/Tokyo">Tokyo, Japan</option>
-            <option value="Asia/Shanghai">Shanghai, China</option>
-            <option value="Asia/Hong_Kong">Hong Kong</option>
-            <option value="Asia/Singapore">Singapore</option>
-            <option value="Asia/Seoul">Seoul, South Korea</option>
-            <option value="Asia/Mumbai">Mumbai, India</option>
-            <option value="Asia/Bangkok">Bangkok, Thailand</option>
-            <option value="Australia/Sydney">Sydney, Australia</option>
-            <option value="Pacific/Auckland">Auckland, New Zealand</option>
-            <option value="Africa/Cairo">Cairo, Egypt</option>
-            <option value="Africa/Johannesburg">Johannesburg, South Africa</option>
-          </select>
-        </div>
-        <div class="clock-container">
-          <div class="analog-clock">
-            <div class="clock-face">
-              <div class="hand hour-hand" data-hand="hour-1"></div>
-              <div class="hand minute-hand" data-hand="minute-1"></div>
-              <div class="hand second-hand" data-hand="second-1"></div>
-              <div class="center-dot"></div>
-            </div>
-          </div>
-          <div class="digital-info">
-            <div class="city-name" data-city="1">London</div>
-            <div class="time" data-time="1">00:00:00</div>
-            <div class="date" data-date="1">Monday, January 1, 2024</div>
-            <div class="timezone" data-tz="1">GMT (UTC+0)</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Clock 3 -->
-      <div class="location-card" data-index="2">
-        <div class="card-header">
-          <h3 class="location-number">Location 3</h3>
-          <select class="location-select" data-clock="2">
-            <option value="America/New_York">New York, USA</option>
-            <option value="America/Los_Angeles">Los Angeles, USA</option>
-            <option value="America/Chicago">Chicago, USA</option>
-            <option value="America/Denver">Denver, USA</option>
-            <option value="America/Toronto">Toronto, Canada</option>
-            <option value="America/Mexico_City">Mexico City, Mexico</option>
-            <option value="America/Sao_Paulo">São Paulo, Brazil</option>
-            <option value="Europe/London">London, UK</option>
-            <option value="Europe/Paris">Paris, France</option>
-            <option value="Europe/Berlin">Berlin, Germany</option>
-            <option value="Europe/Rome">Rome, Italy</option>
-            <option value="Europe/Madrid">Madrid, Spain</option>
-            <option value="Europe/Moscow">Moscow, Russia</option>
-            <option value="Asia/Dubai">Dubai, UAE</option>
-            <option value="Asia/Tokyo" selected>Tokyo, Japan</option>
-            <option value="Asia/Shanghai">Shanghai, China</option>
-            <option value="Asia/Hong_Kong">Hong Kong</option>
-            <option value="Asia/Singapore">Singapore</option>
-            <option value="Asia/Seoul">Seoul, South Korea</option>
-            <option value="Asia/Mumbai">Mumbai, India</option>
-            <option value="Asia/Bangkok">Bangkok, Thailand</option>
-            <option value="Australia/Sydney">Sydney, Australia</option>
-            <option value="Pacific/Auckland">Auckland, New Zealand</option>
-            <option value="Africa/Cairo">Cairo, Egypt</option>
-            <option value="Africa/Johannesburg">Johannesburg, South Africa</option>
-          </select>
-        </div>
-        <div class="clock-container">
-          <div class="analog-clock">
-            <div class="clock-face">
-              <div class="hand hour-hand" data-hand="hour-2"></div>
-              <div class="hand minute-hand" data-hand="minute-2"></div>
-              <div class="hand second-hand" data-hand="second-2"></div>
-              <div class="center-dot"></div>
-            </div>
-          </div>
-          <div class="digital-info">
-            <div class="city-name" data-city="2">Tokyo</div>
-            <div class="time" data-time="2">00:00:00</div>
-            <div class="date" data-date="2">Monday, January 1, 2024</div>
-            <div class="timezone" data-tz="2">JST (UTC+9)</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Fun Facts Section -->
-    <section class="fun-facts">
-      <div class="fact-card">
-        <div class="fact-icon">🌏</div>
-        <h3>Did You Know?</h3>
-        <p id="funFact">Loading fun fact...</p>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <p>&copy; 2024 World Clock. <a href="portfolio.html">Back to Portfolio</a></p>
-  </footer>
-
-  <!-- Toast Notification -->
-  <div id="toast" class="toast"></div>
-
-  <script src="src/script.js"></script>
-</body>
+    <script src="src/script.js"></script>
+  </body>
 </html>
