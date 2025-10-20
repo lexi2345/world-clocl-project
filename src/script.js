@@ -1,9 +1,3 @@
-/* ====================================
-   WORLD CLOCK - JAVASCRIPT
-   Real-time clock updates with timezone support
-   ==================================== */
-
-// ===== CONFIGURATION =====
 const DEFAULT_TIMEZONES = [
   'America/New_York',
   'Europe/London', 
@@ -399,3 +393,4 @@ window.WorldClock = {
   detectUserLocation,
   selectedTimezones,
   userTimezone
+};
